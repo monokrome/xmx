@@ -1,15 +1,30 @@
+Q = require 'q'
+
 {Base} = require './base'
 {exec} = require 'child_process'
+
+# TODO: Handle output from subprocesses better?
 
 class CommandRunner extends Base
   translate: (command) -> command
 
   call: (command, end) =>
+    deferred = Q.defer()
+    output = ""
+
     process = exec @translate command
+
+    process.stdout.on 'data', (data) -> output += data
+
+    process.on 'close', (err) ->
+      if err
+        deferred.reject output 
+      else
+        deferred.resolve output
 
     if !end? or end == true then process.stdin.end()
 
-    return process
+    return deferred.promise
 
 class TmuxCommandRunner extends CommandRunner
   translate: (command) -> "tmux #{command}"
@@ -22,7 +37,7 @@ commandRunnerFactory = (options, type) ->
 
   runner = new module.exports[className] options
 
-  runner.call
+  return runner.call
 
 module.exports = {
   CommandRunner
