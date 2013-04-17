@@ -27,9 +27,7 @@ respetively. For instance, let's set a global free-form option called example:
 You can get lists of clients, sessions, windows, or panes and some interesting
 info about them like so:
 
-    promise = XMX.getSessions();
-
-    promise.done(function (sessions) {
+    XMX.getSessions().done(function (sessions) {
         console.dir(sessions);
     });
 
