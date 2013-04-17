@@ -1,5 +1,5 @@
 XMX
 ===
 
-An extensible multiplixing expression library.
+An extensible multiplexing expression library.
 
