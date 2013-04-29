@@ -44,7 +44,7 @@ class TmuxOptionRegistry extends OptionRegistry
   get: (key) =>
     commandString = @optionCommand 'show', key
 
-    @comand "show-option #{key} #{value}"
+    @command "show-option #{key}"
 
 optionRegistryFactory = (options, type) ->
   options = options or {}
