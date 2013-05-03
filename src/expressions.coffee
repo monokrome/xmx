@@ -1,3 +1,4 @@
+# TODO: Change things to use format instead of regex
 module.exports =
   tmux:
     clientsList: ///^
