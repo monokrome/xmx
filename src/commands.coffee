@@ -3,8 +3,6 @@ Q = require 'q'
 {Base} = require './base'
 {exec} = require 'child_process'
 
-# TODO: Handle output from subprocesses better?
-
 class CommandRunner extends Base
   translate: (command) -> command
 
