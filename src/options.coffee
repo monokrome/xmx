@@ -1,34 +1,11 @@
-{Base} = require './base'
+{TMuxTargetable} = require './targetable'
 
 {commandRunnerFactory} = require './commands'
 
-class OptionRegistry extends Base
+class OptionRegistry extends TMuxTargetable
   command: commandRunnerFactory()
 
-
 class TmuxOptionRegistry extends OptionRegistry
-  contexts =
-    window: '-w'
-    session: '-s'
-    pane: '-p'
-
-  getContext: =>
-    if @options.context?
-      return @contexts[@option.context] or @options.context
-    
-    return ''
-
-  getTarget: =>
-    if @options.targetType?
-      flag = "#{@getContext()}"
-
-      if @options.target?
-        flag = "#{flag} #{@options.target}"
-
-      return flag
-
-    return ''
-
   optionCommand: (method, key, value) =>
     method = method or ''
     key = key or ''

@@ -1,9 +1,10 @@
 Q = require 'q'
 
-{Base} = require './base'
+{TMuxTargetable} = require './targetable'
 {exec} = require 'child_process'
 
-class CommandRunner extends Base
+# TODO: Make targetables generic.
+class CommandRunner extends TMuxTargetable
   translate: (command) -> command
 
   call: (command, end) =>
@@ -25,7 +26,7 @@ class CommandRunner extends Base
     return deferred.promise
 
 class TmuxCommandRunner extends CommandRunner
-  translate: (command) -> "tmux #{command}"
+  translate: (command) -> "tmux #{command} #{@getContext()} #{@getTarget()}"
 
 commandRunnerFactory = (options, type) ->
   options = options or {}

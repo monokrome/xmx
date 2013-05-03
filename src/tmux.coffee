@@ -12,9 +12,8 @@ objectFactory = (objectType) ->
 
       for line in objectData
         objectName = objectType.name
-        expression = expressions.tmux[objectName.toLowerCase() + 's']
-
-        matches = line.match expressions.tmux[objectName.toLowerCase() + 'sList']
+        expression = expressions.tmux[objectName.toLowerCase() + 'sList']
+        matches = line.match expression
 
         if not matches then continue
 
@@ -22,6 +21,7 @@ objectFactory = (objectType) ->
 
         if object.parseMatches?
           object.parseMatches matches
+          object.setupCommands()
 
         objects.push object
 
