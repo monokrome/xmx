@@ -12,8 +12,8 @@ module.exports =
       (\d+)\:\s                # Session identifier
       (\d+)\swindows\s+        # Windows in session
       \(created ([^\)]+)\)\s+  # Creation date
-      \[(\d+)x(\d+)\]\s+       # Dimensions
-      \((\w+)\)                # Attached state
+      \[(\d+)x(\d+)\]          # Dimensions
+      (\s+\((\w+)\))?          # Attached state
     $///
 
     windowsList: ///^
@@ -33,6 +33,6 @@ module.exports =
       (\d+)/(\d+),\s           # History line count
       (\d+)\sbytes]\s          # History size
       %(\d+)                   # Don't know wtf that is
-      (\s\((\w+)\))?           # State
+      (\s+\((\w+)\))?          # State
     $///
 
