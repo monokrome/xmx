@@ -1,5 +1,6 @@
 {Base} = require './base'
 {Window} = require './windows'
+{Pane} = require './panes'
 
 {objectFactory} = require './tmux'
 {commandRunnerFactory} = require './commands'
@@ -12,7 +13,7 @@ class Session extends Base
 
   setupCommands: =>
     options =
-      targetType: 'session'
+      context: 'session'
       target: @identifier
 
     @command = commandRunnerFactory options, 'tmux'
@@ -31,6 +32,7 @@ class Session extends Base
   @factory: objectFactory Session
 
   getWindows: -> Window.factory @command 'list-windows'
+  getPanes: -> Pane.factory @command 'list-panes'
 
 module.exports = {
   Session
