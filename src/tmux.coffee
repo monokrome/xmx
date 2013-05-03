@@ -21,7 +21,9 @@ objectFactory = (objectType) ->
 
         if object.parseMatches?
           object.parseMatches matches
-          object.setupCommands()
+
+          if object.setupCommands?
+            object.setupCommands()
 
         objects.push object
 
