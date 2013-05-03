@@ -1,43 +1,21 @@
-Q = require 'q'
 {Base} = require './base'
 
-expressions = require './expressions'
+{objectFactory} = require './tmux'
 
 class Client extends Base
+  parseMatches: (matches) =>
+    @tty = matches[1]
+    @identifier = matches[2]
 
-tmuxClientFactory = (promise) ->
-  deferred = Q.defer()
+    @columns = matches[3]
+    @rows = matches[4]
 
-  promise.done (rawData) ->
-    clientData = rawData.split('\n').filter (line) -> line != ''
-    clients = []
+    @terminal = matches[6]
+    @encoding = matches[7]
 
-    for line in clientData
-      matches = line.match expressions.tmux.clientsList
-
-      # TODO: Log an error. This should never happen.
-      if !matches then continue
-
-      client = new Client
-
-      client.tty = matches[1]
-      client.identifier = matches[2]
-
-      client.columns = matches[3]
-      client.rows = matches[4]
-
-      client.terminal = matches[6]
-      client.encoding = matches[7]
-
-      clients.push client
-
-    deferred.resolve clients
-
-  return deferred.promise
+  @factory: objectFactory Client
 
 module.exports = {
   Client
-
-  tmuxClientFactory
 }
 

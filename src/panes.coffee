@@ -1,53 +1,31 @@
-Q = require 'q'
 {Base} = require './base'
 
-expressions = require './expressions'
+{objectFactory} = require './tmux'
 
 class Pane extends Base
+  parseMatches: (matches) =>
+    @identifier = matches[1]
 
-tmuxPaneFactory = (promise) ->
-  deferred = Q.defer()
+    @columns = matches[2]
+    @rows = matches[3]
 
-  promise.then (rawData) ->
-    paneData = rawData.split('\n').filter (line) -> line != ''
-    panes = []
+    @history =
+      size: matches[6]
+      parts: [
+        matches[4],
+        matches[5]
+      ]
 
-    for line in paneData
-      matches = line.match expressions.tmux.panesList
+    @index = matches[7]
 
-      if !matches then continue
+    # 8 marks a segment as optional, so isn't used in parseMatches
 
-      pane = new Pane
+    if matches.length > 9
+      @state = matches[9]
 
-      pane.identifier = matches[1]
-
-      pane.columns = matches[2]
-      pane.rows = matches[3]
-
-      pane.history =
-        size: matches[6]
-        parts: [
-          matches[4],
-          matches[5]
-        ]
-
-      pane.index = matches[7]
-
-      # 8 marks a segment as optional
-
-      if matches.length > 9
-        pane.state = matches[9]
-
-      panes.push pane
-
-    deferred.resolve panes
-
-  return deferred.promise
+  @factory: objectFactory Pane
 
 module.exports = {
   Pane
-
-  tmuxPaneFactory
 }
-
 

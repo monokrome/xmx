@@ -1,44 +1,23 @@
-Q = require 'q'
 {Base} = require './base'
 
-expressions = require './expressions'
+{objectFactory} = require './tmux'
 
 class Window extends Base
+  parseMatches: (matches) =>
+    @identifier = matches[0]
+    @name = matches[1]
+    @paneCount = matches[2]
 
-tmuxWindowFactory = (promise) ->
-  deferred = Q.defer()
+    @columns = matches[3]
+    @rows = matches[4]
 
-  promise.then (rawData) ->
-    windowData = rawData.split('\n').filter (line) -> line != ''
-    windows = []
+    @layout = matches[5]
+    @index = matches[6]
+    @state = matches[7]
 
-    for line in windowData
-      matches = line.match expressions.tmux.windowsList
-
-      if !matches then continue
-
-      win = new Window
-
-      win.identifier = matches[0]
-      win.name = matches[1]
-      win.paneCount = matches[2]
-
-      win.columns = matches[3]
-      win.rows = matches[4]
-
-      win.layout = matches[5]
-      win.index = matches[6]
-      win.state = matches[7]
-
-      windows.push win
-
-    deferred.resolve windows
-
-  return deferred.promise
-
+  @factory: objectFactory Window
+    
 module.exports = {
   Window
-
-  tmuxWindowFactory
 }
 
