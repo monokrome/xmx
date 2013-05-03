@@ -11,7 +11,8 @@ class CommandRunner extends TMuxTargetable
     deferred = Q.defer()
     output = ""
 
-    process = exec @translate command
+    translatedCommand = @translate command
+    process = exec translatedCommand
 
     process.stdout.on 'data', (data) -> output += data
 
@@ -26,7 +27,8 @@ class CommandRunner extends TMuxTargetable
     return deferred.promise
 
 class TmuxCommandRunner extends CommandRunner
-  translate: (command) -> "tmux #{command} #{@getContext()} #{@getTarget()}"
+  translate: (command) ->
+    result = "tmux #{command} #{@getContext()} #{@getTarget()}"
 
 commandRunnerFactory = (options, type) ->
   options = options or {}
