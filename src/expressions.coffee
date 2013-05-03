@@ -27,7 +27,9 @@ module.exports =
     $///
 
     panesList: ///^
-      (\d+)\:\s                # Pane identifier
+      ((\d+)\.)?               # Optional window identifier
+      (\d+)                    # Pane identifier
+      \:\s
       \[(\d+)x(\d+)\]\s        # Dimensions
       \[history\s
       (\d+)/(\d+),\s           # History line count

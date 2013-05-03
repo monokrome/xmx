@@ -4,24 +4,25 @@
 
 class Pane extends Base
   parseMatches: (matches) =>
-    @identifier = matches[1]
+    @window = matches[2]
+    @identifier = matches[3]
 
-    @columns = matches[2]
-    @rows = matches[3]
+    @columns = matches[4]
+    @rows = matches[5]
 
     @history =
-      size: matches[6]
+      size: matches[8]
       parts: [
-        matches[4],
-        matches[5]
+        matches[6],
+        matches[7]
       ]
 
-    @index = matches[7]
+    @index = matches[9]
 
-    # 8 marks a segment as optional, so isn't used in parseMatches
+    # 10 marks a segment as optional, so isn't used in parseMatches
 
-    if matches.length > 9
-      @state = matches[9]
+    if matches.length > 11
+      @state = matches[11]
 
   @factory: objectFactory Pane
 
