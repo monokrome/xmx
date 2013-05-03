@@ -18,12 +18,12 @@ module.exports =
 
     windowsList: ///^
       (\d+)\:\s                # Window identifier
-      ([^\*]+)\*\s             # Window name
+      ([^\s]+)\s               # Window name
       \((\d+)\spanes\)\s       # Pane count
       \[(\d+)x(\d+)\]\s        # Dimensions
       \[layout\s([^\s]+)\s     # Window layout
-      @(\d+)\s                 # No idea wtf that is
-      \((\w+)\)                # Window state
+      @(\d+)                   # No idea wtf that is
+      (\s\((\w+)\))?           # Window state
     $///
 
     panesList: ///^
