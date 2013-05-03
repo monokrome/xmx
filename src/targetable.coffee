@@ -5,8 +5,8 @@ class Targetable extends Base
 
 class TMuxTargetable extends Targetable
   contexts:
-    window: '-w'
     session: '-s'
+    window: '-w'
     pane: '-p'
 
   getContext: =>
