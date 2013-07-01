@@ -41,7 +41,8 @@ class TMuxTargetable extends Targetable
             contextIndex = @contextInheritance.indexOf @options.context
             commandTypeIndex = @contextInheritance.indexOf commandType
 
-            if commandTypeIndex == (contextIndex + 1) then return ''
+            if commandTypeIndex == (contextIndex + 1) or commandTypeIndex == contextIndex
+              return ''
 
       return @contexts[@options.context] or @options.context
 
