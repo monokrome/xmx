@@ -2,8 +2,8 @@
 module.exports =
   tmux:
     clientsList: ///^
-      ([^:]+):\s               # TTY path
-      (\d+)\s                  # Dunno wtf that is
+      ([^:]+):\s               # TTY path (client identifier)
+      (\d+)\s                  # Active session for this client
       \[(\d+)x(\d+)\s          # Dimensions
       ([^\]]+)\]\s             # Terminal type
       \(([^\)])+\)\s           # Encoding

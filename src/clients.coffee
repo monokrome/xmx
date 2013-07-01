@@ -4,8 +4,8 @@
 
 class Client extends Base
   parseMatches: (matches) =>
-    @tty = matches[1]
-    @identifier = matches[2]
+    @identifier = matches[1]
+    @session = matches[2]
 
     @columns = matches[3]
     @rows = matches[4]
