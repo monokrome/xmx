@@ -1,22 +1,32 @@
 {Base} = require './base'
 
 {objectFactory} = require './tmux'
+{commandRunnerFactory} = require './commands'
 
 class Window extends Base
+  initialize: => @setupCommands()
+
+  setupCommands: =>
+    options =
+      context: 'window'
+      target: @identifier
+
+    @command = commandRunnerFactory options, 'tmux'
+
   parseMatches: (matches) =>
-    @identifier = matches[0]
-    @name = matches[1]
-    @paneCount = matches[2]
+    @identifier = matches[1]
+    @name = matches[2]
+    @paneCount = matches[3]
 
-    @columns = matches[3]
-    @rows = matches[4]
+    @columns = matches[4]
+    @rows = matches[5]
 
-    @layout = matches[5]
-    @index = matches[6]
-    @state = matches[7]
+    @layout = matches[6]
+    @index = matches[7]
+    @state = matches[8]
 
   @factory: objectFactory Window
-    
+
 module.exports = {
   Window
 }
