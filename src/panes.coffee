@@ -1,8 +1,18 @@
 {Base} = require './base'
 
 {objectFactory} = require './tmux'
+{commandRunnerFactory} = require './commands'
 
 class Pane extends Base
+  initialize: => @setupCommands()
+
+  setupCommands: =>
+    options =
+      context: 'pane'
+      target: @identifier
+
+    @command = commandRunnerFactory options, 'tmux'
+
   parseMatches: (matches) =>
     @window = matches[2]
     @identifier = matches[3]
