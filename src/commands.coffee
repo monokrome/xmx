@@ -18,7 +18,7 @@ class CommandRunner extends TMuxTargetable
 
     process.on 'close', (err) ->
       if err
-        deferred.reject output 
+        deferred.reject output
       else
         deferred.resolve output
 
@@ -28,7 +28,9 @@ class CommandRunner extends TMuxTargetable
 
 class TmuxCommandRunner extends CommandRunner
   translate: (command) ->
-    result = "tmux #{command} #{@getContext()} #{@getTarget()}"
+    result = "tmux #{command} #{@getContext(command)} #{@getTarget()}"
+
+    return result
 
 commandRunnerFactory = (options, type) ->
   options = options or {}
