@@ -8,8 +8,8 @@
 
 # TODO: Support command mode when instantiated
 class XMX
-  @command: commandRunnerFactory({}, 'tmux')
-  @options: optionRegistryFactory({}, 'tmux')
+  @command: commandRunnerFactory {}, 'tmux'
+  @options: optionRegistryFactory {}, 'tmux'
 
   @getClients: => Client.factory @command 'list-clients'
   @getSessions: => Session.factory @command 'list-sessions'
