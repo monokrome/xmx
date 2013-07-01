@@ -15,7 +15,7 @@ class TMuxTargetable extends Targetable
   # example, `tmux list-windows` doesn't take a -s argument, even though
   # `tmux list-panes` does - and windows are inside of sessions. The assumed
   # defaults can not be provided for no good reason.
-  contextInheritance: [ 'server', 'session', 'window', 'pane' ]
+  contextInheritance: [ 'server', 'client', 'session', 'window', 'pane' ]
 
   getContext: (command) =>
     if @options.context?
