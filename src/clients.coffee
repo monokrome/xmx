@@ -1,8 +1,18 @@
 {Base} = require './base'
 
 {objectFactory} = require './tmux'
+{commandRunnerFactory} = require './commands'
 
 class Client extends Base
+  initialize: =>
+    @setupCommands()
+
+  setupCommands: =>
+    options =
+      target: @identifier
+
+    @command = commandRunnerFactory options, 'tmux'
+
   parseMatches: (matches) =>
     @identifier = matches[1]
     @session = matches[2]
