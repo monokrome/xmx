@@ -1,6 +1,7 @@
 {commandRunnerFactory} = require './commands'
 {optionRegistryFactory} = require './options'
 
+{Server} = require './servers'
 {Client} = require './clients'
 {Session} = require './sessions'
 {Window} = require './windows'
@@ -10,6 +11,8 @@
 class XMX
   @command: commandRunnerFactory {}, 'tmux'
   @options: optionRegistryFactory {}, 'tmux'
+
+  @server: new Server
 
   @getClients: => Client.factory @command 'list-clients'
   @getSessions: => Session.factory @command 'list-sessions'
