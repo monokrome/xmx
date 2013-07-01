@@ -1,5 +1,7 @@
 {Base} = require './base'
 
+{Window} = require './windows'
+
 {objectFactory} = require './tmux'
 {commandRunnerFactory} = require './commands'
 
@@ -8,6 +10,7 @@ class Client extends Base
     @setupCommands()
 
   setupCommands: =>
+    # Clients can be used interchangably with sessions
     options =
       target: @identifier
 
@@ -24,6 +27,8 @@ class Client extends Base
     @encoding = matches[7]
 
   @factory: objectFactory Client
+
+  getWindows: -> Window.factory @command 'list-windows'
 
 module.exports = {
   Client
