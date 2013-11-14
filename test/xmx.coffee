@@ -30,18 +30,29 @@ describe 'XMX', ->
     it 'is an instance of Server', ->
       expect(XMX.server).to.be.instanceof Server
 
-  # This is a bit meta, but I really want to keep it DRY.
-  checkFactory = (Type, method) -> ->
-    mockCommand = -> Q.defer().promise
+  # This is a bit meta, but I really want to keep it DRY. The basic idea here
+  # is that we're mocking the process used my CommandRunner to give us the
+  # output from a command by providing fake output as a fixture.
+  mockCommand = (fixture) ->
+    deferred = Q.defer()
 
-    it "calls #{ Type.name }.factory", ->
+    resolve = -> deferred.resolve fixture
+    setTimeout resolve, 0
+
+    return -> deferred.promise
+
+  checkFactory = (Type, method) -> ->
+    it "calls #{ Type.name }.factory", (done) ->
       @sandbox.spy Type, 'factory'
-      @sandbox.stub XMX, 'command', mockCommand
+      @sandbox.stub XMX, 'command', mockCommand fixtures[Type.name]
 
       result = XMX[method]()
 
-      expect(XMX.command.calledOnce).to.equal true
-      expect(Type.factory.calledOnce).to.equal true
+      result.done (objects) ->
+        expect(XMX.command.calledOnce).to.equal true
+        expect(Type.factory.calledOnce).to.equal true
+
+        done()
 
   describe '#getSessions', checkFactory Session, 'getSessions'
   describe '#getClients', checkFactory Client, 'getClients'
