@@ -15,6 +15,13 @@ describe 'TMuxTargetable', ->
       expect(targetable.getContext 'list-windows').to.equal '-a'
       expect(targetable.getContext 'list-panes').to.equal '-a'
 
+    it 'returns expected values with a client context', ->
+      targetable = new TMuxTargetable
+        context: 'client'
+
+      expect(targetable.getContext 'list-windows').to.equal ''
+      expect(targetable.getContext 'list-panes').to.equal ''
+
     it 'returns expected values with a session context', ->
       targetable = new TMuxTargetable
         context: 'session'
