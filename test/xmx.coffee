@@ -26,28 +26,22 @@ describe 'XMX', ->
   beforeEach -> @sandbox = sinon.sandbox.create()
   afterEach -> @sandbox.restore()
 
-  # This is a bit meta, but I really want to keep it DRY.
-  checkFactory = (Type, method) -> ->
-    @sandbox.spy Type, 'factory'
-    @sandbox.stub XMX, 'command', mockCommand
-
-    result = XMX[method]()
-
-    expect(XMX.command.calledOnce).to.equal true
-    expect(Type.factory.calledOnce).to.equal true
-
   describe '#server', ->
     it 'is an instance of Server', ->
       expect(XMX.server).to.be.instanceof Server
 
-  describe '#getClients', ->
-    it 'calls Client.factory', checkFactory Client, 'getClients'
+  # This is a bit meta, but I really want to keep it DRY.
+  checkFactory = (Type, method) -> ->
+    it "calls #{ Type.name }.factory", ->
+      @sandbox.spy Type, 'factory'
+      @sandbox.stub XMX, 'command', mockCommand
 
-  describe '#getSessions', ->
-    it 'calls Session.factory', checkFactory Session, 'getSessions'
+      result = XMX[method]()
 
-  describe '#getWindows', ->
-    it 'calls Window.factory', checkFactory Window, 'getWindows'
+      expect(XMX.command.calledOnce).to.equal true
+      expect(Type.factory.calledOnce).to.equal true
 
-  describe '#getPanes', ->
-    it 'calls Pane.factory', checkFactory Pane, 'getPanes'
+  describe '#getClients', checkFactory Client, 'getClients'
+  describe '#getSessions', checkFactory Session, 'getSessions'
+  describe '#getWindows', checkFactory Window, 'getWindows'
+  describe '#getPanes',  checkFactory Pane, 'getPanes'
