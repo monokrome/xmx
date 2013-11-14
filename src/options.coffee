@@ -1,6 +1,7 @@
 {TMuxTargetable} = require './targetable'
-
 {commandRunnerFactory} = require './commands'
+
+_ = require 'lodash'
 
 
 class OptionRegistry extends TMuxTargetable
@@ -13,10 +14,19 @@ class TmuxOptionRegistry extends OptionRegistry
     key = key or ''
     value = value or ''
 
-    contextArg = @asArgument @getContext()
-    targetArg = @asArgument @getTarget()
+    args = [
+      @getContext()
+      @getTarget()
+      key
+      value
+    ].map @asArgument
 
-    return "#{method}-option #{contextArg}#{targetArg}#{key} #{value}"
+    args = args.reduce (left, right) ->
+      return right if left.length is 0
+      return left if right.length is 0
+      return left + ' ' + right
+
+    return method + '-option ' + args
 
   set: (key, value) => @command @optionCommand 'set', key, value
   get: (key) => @command @optionCommand 'show', key

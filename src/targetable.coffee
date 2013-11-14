@@ -4,6 +4,10 @@
 class Targetable extends Base
   getTarget: -> throw new Error 'Targetable must be extended.'
 
+  asArgument: (argument) ->
+    return '' unless argument? and argument.length > 0
+    return argument
+
 
 class TMuxTargetable extends Targetable
   contexts:
@@ -60,10 +64,6 @@ class TMuxTargetable extends Targetable
       flag = "#{flag} -t #{@options.target}"
 
     return flag
-
-  asArgument: (argument) ->
-    return '' unless argument?.length? and argument.length > 0
-    return " #{ argument } "
 
 
 module.exports = {

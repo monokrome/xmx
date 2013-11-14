@@ -19,7 +19,8 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "winston": "0.6.2"
+    "winston": "0.6.2",
+    "lodash": "~2.3.0"
   },
   "devDependencies": {
     "coffee-script": "1.6.2",
