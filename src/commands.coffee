@@ -1,7 +1,7 @@
 Q = require 'q'
 
 {TMuxTargetable} = require './targetable'
-{exec} = require 'child_process'
+child_process = require 'child_process'
 
 
 # TODO: Make targetables generic.
@@ -13,7 +13,7 @@ class CommandRunner extends TMuxTargetable
     output = ""
 
     translatedCommand = @translate command
-    process = exec translatedCommand
+    process = child_process.exec translatedCommand
 
     process.stdout.on 'data', (data) -> output += data
 
