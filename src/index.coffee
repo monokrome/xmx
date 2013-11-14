@@ -22,4 +22,3 @@ class XMX
 
 
 module.exports = {XMX}
-

@@ -9,9 +9,7 @@
 
 
 class Server extends Base
-  initialize: => @setupCommands()
-
-  setupCommands: =>
+  initialize: =>
     options =
       context: 'server'
 

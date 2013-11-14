@@ -10,7 +10,7 @@ class Base
     else
       @options = options
 
-    if @initialize? then  @initialize()
+    if @initialize? then @initialize()
 
 
 module.exports = {Base}

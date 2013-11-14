@@ -7,9 +7,6 @@
 
 class Client extends Base
   initialize: =>
-    @setupCommands()
-
-  setupCommands: =>
     # Clients can be used interchangably with sessions
     options =
       target: @identifier

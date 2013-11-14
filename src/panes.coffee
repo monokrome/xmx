@@ -5,9 +5,7 @@
 
 
 class Pane extends Base
-  initialize: => @setupCommands()
-
-  setupCommands: =>
+  initialize: =>
     options =
       context: 'pane'
       target: @identifier

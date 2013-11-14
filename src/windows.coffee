@@ -6,9 +6,7 @@
 
 
 class Window extends Base
-  initialize: => @setupCommands()
-
-  setupCommands: =>
+  initialize: =>
     options =
       context: 'window'
       target: @identifier

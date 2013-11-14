@@ -10,9 +10,6 @@ expressions = require './expressions'
 
 class Session extends Base
   initialize: =>
-    @setupCommands()
-
-  setupCommands: =>
     options =
       context: 'session'
       target: @identifier
