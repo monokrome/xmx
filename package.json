@@ -28,6 +28,7 @@
     "mocha": "~1.14.0",
     "chai": "~1.8.1",
     "sinon": "~1.7.3",
-    "mockery": "1.4.0"
+    "mockery": "1.4.0",
+    "coffee-coverage": "~0.3.0"
   }
 }
