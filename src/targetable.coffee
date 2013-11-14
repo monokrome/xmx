@@ -55,15 +55,15 @@ class TMuxTargetable extends Targetable
     return ''
 
   getTarget: =>
+    flags = []
+
     if @options.targetType?
-      flag = @contexts[@options.targetType] or @options.targetType
-    else
-      flag = ''
+      flags.push @contexts[@options.targetType] or @options.targetType
 
     if @options.target?
-      flag = "#{flag} -t #{@options.target}"
+      flags.push '-t ' + @options.target
 
-    return flag
+    return flags.join ' '
 
 
 module.exports = {
