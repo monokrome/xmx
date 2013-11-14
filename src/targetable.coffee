@@ -61,6 +61,10 @@ class TMuxTargetable extends Targetable
 
     return flag
 
+  asArgument: (argument) ->
+    return '' unless argument?.length? and argument.length > 0
+    return " #{ argument } "
+
 
 module.exports = {
   Targetable

@@ -13,17 +13,13 @@ class TmuxOptionRegistry extends OptionRegistry
     key = key or ''
     value = value or ''
 
-    return "#{method}-option #{@getContext()} #{@getTarget()} #{key} #{value}"
+    contextArg = @asArgument @getContext()
+    targetArg = @asArgument @getTarget()
 
-  set: (key, value) =>
-    commandString = @optionCommand 'set', key, value
+    return "#{method}-option #{contextArg}#{targetArg}#{key} #{value}"
 
-    @command commandString
-
-  get: (key) =>
-    commandString = @optionCommand 'show', key
-
-    @command "show-option #{key}"
+  set: (key, value) => @command @optionCommand 'set', key, value
+  get: (key) => @command @optionCommand 'show', key
 
 
 optionRegistryFactory = (options, type) ->
