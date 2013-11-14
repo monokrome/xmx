@@ -3,14 +3,9 @@
 
 class Base
   constructor: (options) ->
-    options = options or {}
+    @options = options or {}
 
-    if @parseOptions?
-      @options = @parseOptions options
-    else
-      @options = options
-
-    if @initialize? then @initialize()
+    if @initialize? then @initialize options
 
 
 module.exports = {Base}
