@@ -1,9 +1,9 @@
 {Base} = require './base'
-
 {Window} = require './windows'
 
-{objectFactory} = require './tmux'
 {commandRunnerFactory} = require './commands'
+{objectFactory} = require './tmux'
+
 
 class Client extends Base
   initialize: =>
@@ -30,7 +30,5 @@ class Client extends Base
 
   getWindows: -> Window.factory @command 'list-windows'
 
-module.exports = {
-  Client
-}
 
+module.exports = {Client}

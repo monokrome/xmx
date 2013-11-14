@@ -2,6 +2,7 @@ Q = require 'q'
 
 expressions = require './expressions'
 
+
 objectFactory = (objectType) ->
   return (promise) ->
     deferred = Q.defer()
@@ -31,7 +32,5 @@ objectFactory = (objectType) ->
 
     return deferred.promise
 
-module.exports = {
-  objectFactory
-}
 
+module.exports = {objectFactory}

@@ -3,6 +3,7 @@ Q = require 'q'
 {TMuxTargetable} = require './targetable'
 {exec} = require 'child_process'
 
+
 # TODO: Make targetables generic.
 class CommandRunner extends TMuxTargetable
   translate: (command) -> command
@@ -26,11 +27,13 @@ class CommandRunner extends TMuxTargetable
 
     return deferred.promise
 
+
 class TmuxCommandRunner extends CommandRunner
   translate: (command) ->
     result = "tmux #{command} #{@getContext(command)} #{@getTarget()}"
 
     return result
+
 
 commandRunnerFactory = (options, type) ->
   options = options or {}
@@ -42,10 +45,10 @@ commandRunnerFactory = (options, type) ->
 
   return runner.call
 
+
 module.exports = {
   CommandRunner
   TmuxCommandRunner
 
   commandRunnerFactory
 }
-

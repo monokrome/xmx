@@ -7,6 +7,7 @@
 
 expressions = require './expressions'
 
+
 class Session extends Base
   initialize: =>
     @setupCommands()
@@ -34,7 +35,5 @@ class Session extends Base
   getWindows: -> Window.factory @command 'list-windows'
   getPanes: -> Pane.factory @command 'list-panes'
 
-module.exports = {
-  Session
-}
 
+module.exports = {Session}

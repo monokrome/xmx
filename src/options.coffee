@@ -2,8 +2,10 @@
 
 {commandRunnerFactory} = require './commands'
 
+
 class OptionRegistry extends TMuxTargetable
   command: commandRunnerFactory()
+
 
 class TmuxOptionRegistry extends OptionRegistry
   optionCommand: (method, key, value) =>
@@ -23,6 +25,7 @@ class TmuxOptionRegistry extends OptionRegistry
 
     @command "show-option #{key}"
 
+
 optionRegistryFactory = (options, type) ->
   options = options or {}
 
@@ -31,10 +34,10 @@ optionRegistryFactory = (options, type) ->
 
   return new module.exports[className] options
 
+
 module.exports = {
   OptionRegistry
   TmuxOptionRegistry
 
   optionRegistryFactory
 }
-

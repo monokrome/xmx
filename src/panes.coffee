@@ -3,6 +3,7 @@
 {objectFactory} = require './tmux'
 {commandRunnerFactory} = require './commands'
 
+
 class Pane extends Base
   initialize: => @setupCommands()
 
@@ -36,7 +37,5 @@ class Pane extends Base
 
   @factory: objectFactory Pane
 
-module.exports = {
-  Pane
-}
 
+module.exports = {Pane}

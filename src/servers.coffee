@@ -1,5 +1,4 @@
 {Base} = require './base'
-
 {Client} = require './clients'
 {Session} = require './sessions'
 {Window} = require './windows'
@@ -7,6 +6,7 @@
 
 {objectFactory} = require './tmux'
 {commandRunnerFactory} = require './commands'
+
 
 class Server extends Base
   initialize: => @setupCommands()
@@ -22,7 +22,5 @@ class Server extends Base
   getWindows: -> Window.factory @command 'list-windows'
   getPanes: -> Pane.factory @command 'list-panes'
 
-module.exports = {
-  Server
-}
 
+module.exports = {Server}

@@ -1,7 +1,9 @@
 {Base} = require './base'
 
+
 class Targetable extends Base
   getTarget: -> throw new Error 'Targetable must be extended.'
+
 
 class TMuxTargetable extends Targetable
   contexts:
@@ -59,8 +61,8 @@ class TMuxTargetable extends Targetable
 
     return flag
 
+
 module.exports = {
   Targetable
   TMuxTargetable
 }
-

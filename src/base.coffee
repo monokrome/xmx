@@ -1,5 +1,6 @@
 {EventEmitter} = require 'events'
 
+
 class Base
   constructor: (options) ->
     options = options or {}
@@ -11,5 +12,5 @@ class Base
 
     if @initialize? then  @initialize()
 
-module.exports = {Base}
 
+module.exports = {Base}
