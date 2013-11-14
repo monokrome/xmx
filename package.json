@@ -20,7 +20,8 @@
   "readmeFilename": "README.md",
   "dependencies": {
     "winston": "0.6.2",
-    "lodash": "~2.3.0"
+    "lodash": "~2.3.0",
+    "q": "~0.9.7"
   },
   "devDependencies": {
     "coffee-script": "1.6.2",
