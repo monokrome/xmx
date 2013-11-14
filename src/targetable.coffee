@@ -24,7 +24,7 @@ class TMuxTargetable extends Targetable
   contextInheritance: [ 'server', 'client', 'session', 'window', 'pane' ]
 
   getContext: (command) =>
-    if @options.context?
+    if @options.context? and @options.context isnt 'client'
       # This is a hack which solves the earlier mentioned tmux issue where
       # nearest-neighbor contexts aren't allowed to be passed as contexts
       if command?
