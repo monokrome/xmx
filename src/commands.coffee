@@ -6,14 +6,14 @@ child_process = require 'child_process'
 
 # TODO: Make targetables generic.
 class CommandRunner extends TMuxTargetable
-  translate: (command) -> command
-
   call: (command, end) =>
     deferred = Q.defer()
     output = ""
 
-    translatedCommand = @translate command
-    process = child_process.exec translatedCommand
+    if @translate?
+      command = @translate command
+
+    process = child_process.exec command
 
     process.stdout.on 'data', (data) -> output += data
 
