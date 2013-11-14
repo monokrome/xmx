@@ -1,6 +1,8 @@
 XMX
 ===
 
+[![Build Status](https://travis-ci.org/monokrome/xmx.png?branch=master)](https://travis-ci.org/monokrome/xmx)
+
 An extensible multiplexing expression library.
 
 
