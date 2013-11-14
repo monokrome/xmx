@@ -1,8 +1,6 @@
 {TMuxTargetable} = require './targetable'
 {commandRunnerFactory} = require './commands'
 
-_ = require 'lodash'
-
 
 class OptionRegistry extends TMuxTargetable
   command: commandRunnerFactory()
