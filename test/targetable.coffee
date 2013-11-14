@@ -3,6 +3,20 @@
 sinon = require 'sinon'
 
 describe 'TMuxTargetable', ->
+  describe '#getTarget', ->
+    it 'returns just the -t flag without a targetType', ->
+      targetable = new TMuxTargetable
+        target: 0
+
+      expect(targetable.getTarget()).to.equal '-t 0'
+
+    it 'returns the -t flag with a targetType if one is provided', ->
+      targetable = new TMuxTargetable
+        targetType: 'window'
+        target: 0
+
+      expect(targetable.getTarget()).to.equal '-w -t 0'
+
   describe '#getContext', ->
     it 'returns an empty string without a context', ->
       targetable = new TMuxTargetable
