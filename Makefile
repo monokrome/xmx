@@ -8,3 +8,5 @@ all: lib/xmx
 lib/xmx:
 	mkdir -p "${OUT}"
 
+clean:
+	rm -rf "${OUT}"
