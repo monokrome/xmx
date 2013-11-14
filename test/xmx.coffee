@@ -20,8 +20,6 @@ child_process.exec = -> throw new Error '''
 
 
 describe 'XMX', ->
-  mockCommand = -> Q.defer().promise
-
   # Set up sandbox
   beforeEach -> @sandbox = sinon.sandbox.create()
   afterEach -> @sandbox.restore()
@@ -32,6 +30,8 @@ describe 'XMX', ->
 
   # This is a bit meta, but I really want to keep it DRY.
   checkFactory = (Type, method) -> ->
+    mockCommand = -> Q.defer().promise
+
     it "calls #{ Type.name }.factory", ->
       @sandbox.spy Type, 'factory'
       @sandbox.stub XMX, 'command', mockCommand
