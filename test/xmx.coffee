@@ -12,6 +12,8 @@ Q = require 'q'
 {expect} = require 'chai'
 sinon = require 'sinon'
 
+fixtures = require './fixtures'
+
 
 child_process.exec = -> throw new Error '''
   Attempted directly calling child_process.exec during a test
@@ -41,7 +43,7 @@ describe 'XMX', ->
       expect(XMX.command.calledOnce).to.equal true
       expect(Type.factory.calledOnce).to.equal true
 
-  describe '#getClients', checkFactory Client, 'getClients'
   describe '#getSessions', checkFactory Session, 'getSessions'
+  describe '#getClients', checkFactory Client, 'getClients'
   describe '#getWindows', checkFactory Window, 'getWindows'
   describe '#getPanes',  checkFactory Pane, 'getPanes'
