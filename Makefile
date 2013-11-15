@@ -16,7 +16,7 @@ ${dist_dir}/xmx: ${dist_dir}
 coverage: ${build_dir}/coverage.html
 
 ${build_dir}/coverage.html: ${build_dir}/coverage.js
-	mocha --require ${build_dir}/coverage.js -R html-cov > $@
+	node_modules/.bin/mocha --require ${build_dir}/coverage.js -R html-cov > $@
 	make clean_coverage_sources
 
 ${build_dir}/coverage.js: ${build_dir} 
@@ -35,6 +35,6 @@ clean: clean_coverage_sources
 	rm -rf "${build_dir}" "${dist_dir}"
 
 clean_coverage_sources:
-	find src -name \*.js -exec rm {} \;
+	find "${IN}" -name \*.js -exec rm {} \;
 
 .PHONY: xmx prever_cov clean clean_coverage_sources coverage xmx
