@@ -38,3 +38,15 @@ describe 'TmuxCommandRunner', ->
         expect(exec.calledWith 'tmux list-windows').to.be.true
 
         done()
+
+    it 'should handle error cases from child_process#exec', (done) ->
+      exec = @sandbox.stub child_process, 'exec', ->
+        new MockProcess new Error 'A mock error occured!'
+
+      promise = @runner.call 'list-windows'
+
+      promise.fail (data) ->
+        expect(exec.calledOnce).to.be.true
+        expect(exec.calledWith 'tmux list-windows').to.be.true
+
+        done()
