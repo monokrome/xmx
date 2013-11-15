@@ -4,6 +4,15 @@
 class Targetable extends Base
   getTarget: -> throw new Error 'Targetable must be extended.'
 
+  asCommand: (parts) ->
+    result = parts.map @asArgument
+    result = result.reduce (left, right) ->
+      return right unless left?.length? and left.length > 0
+      return left unless right?.length? and right.length > 0
+      return left + ' ' + right
+
+    return result
+
   asArgument: (argument) ->
     return '' unless argument? and argument.length > 0
     return argument

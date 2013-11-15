@@ -8,13 +8,12 @@ child_process = require 'child_process'
 class CommandRunner extends TMuxTargetable
   call: (command, end) =>
     deferred = Q.defer()
-    output = ""
+    output = new String
 
     if @translate?
       command = @translate command
 
     process = child_process.exec command
-
     process.stdout.on 'data', (data) -> output += data
 
     process.on 'close', (err) ->
@@ -23,16 +22,19 @@ class CommandRunner extends TMuxTargetable
       else
         deferred.resolve output
 
-    if !end? or end == true then process.stdin.end()
-
+    if !end? or end is true then process.stdin.end()
     return deferred.promise
 
 
 class TmuxCommandRunner extends CommandRunner
-  translate: (command) ->
-    result = "tmux #{command} #{@getContext(command)} #{@getTarget()}"
+  translate: (command) -> @asCommand [
+    'tmux'
 
-    return result
+    @getTarget()
+    @getContext command
+
+    command
+  ]
 
 
 commandRunnerFactory = (options, type) ->
