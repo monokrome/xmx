@@ -7,7 +7,10 @@ sinon = require 'sinon'
 
 
 class MockProcess extends EventEmitter
-  constructor: ->
+  constructor: (error) ->
+    emitEvents = =>
+      @emit 'close', error
+
     @stdout =
       on: ->
 
@@ -15,6 +18,7 @@ class MockProcess extends EventEmitter
       on: ->
       end: ->
 
+    setTimeout emitEvents, 100
 
 describe 'TmuxCommandRunner', ->
   describe '#call', ->
@@ -25,10 +29,12 @@ describe 'TmuxCommandRunner', ->
     afterEach ->
       @sandbox.restore()
 
-    it 'should execute the given command via child_process#exec', ->
+    it 'should execute the given command via child_process#exec', (done) ->
       exec = @sandbox.stub child_process, 'exec', -> new MockProcess
+      promise = @runner.call 'list-windows'
 
-      @runner.call 'list-windows'
+      promise.done (data) ->
+        expect(exec.calledOnce).to.be.true
+        expect(exec.calledWith 'tmux list-windows').to.be.true
 
-      expect(exec.calledOnce).to.be.true
-      expect(exec.calledWith 'tmux list-windows').to.be.true
+        done()
