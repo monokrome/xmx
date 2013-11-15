@@ -33,7 +33,7 @@ describe 'TmuxCommandRunner', ->
       exec = @sandbox.stub child_process, 'exec', -> new MockProcess
       promise = @runner.call 'list-windows'
 
-      promise.done (data) ->
+      promise.done ->
         expect(exec.calledOnce).to.be.true
         expect(exec.calledWith 'tmux list-windows').to.be.true
 
@@ -45,7 +45,7 @@ describe 'TmuxCommandRunner', ->
 
       promise = @runner.call 'list-windows'
 
-      promise.fail (data) ->
+      promise.fail ->
         expect(exec.calledOnce).to.be.true
         expect(exec.calledWith 'tmux list-windows').to.be.true
 
