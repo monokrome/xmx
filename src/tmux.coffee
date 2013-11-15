@@ -23,9 +23,6 @@ objectFactory = (objectType) ->
         if object.parseMatches?
           object.parseMatches matches
 
-          if object.setupCommands?
-            object.setupCommands()
-
         objects.push object
 
       deferred.resolve objects
