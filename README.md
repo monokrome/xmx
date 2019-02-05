@@ -1,7 +1,7 @@
 XMX
 ===
 
-[![Build Status](https://travis-ci.org/monokrome/xmx.png?branch=master)](https://travis-ci.org/monokrome/xmx)
+[![Build Status](https://travis-ci.org/monokrome/xmx.png?branch=master)](https://travis-ci.org/monokrome/xmx) [![Greenkeeper badge](https://badges.greenkeeper.io/monokrome/xmx.svg)](https://greenkeeper.io/)
 
 An extensible multiplexing expression library.
 
